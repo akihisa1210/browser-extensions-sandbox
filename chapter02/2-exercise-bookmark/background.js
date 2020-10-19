@@ -7,7 +7,7 @@ const getTargetFolder = (folders, target) => {
       return folder;
     }
   }
-  return false;
+  return null;
 };
 
 const folderNodes = [];
@@ -49,16 +49,12 @@ const createBookmarkInFolder = (folderId) => {
 const handleClick = () => {
   chrome.bookmarks.getTree((nodes) => {
     const folders = getFolderNodes(nodes[0]);
-    const targetFolder = getTargetFolder(folders, FOLDER_TITLE);
-    if (! targetFolder) {
-      chrome.bookmarks.create({
+    const targetFolder = getTargetFolder(folders, FOLDER_TITLE) ?? chrome.bookmarks.create({
         title: FOLDER_TITLE,
-      }, (resp) => {
-        createBookmarkInFolder(resp.id);
+      }, (folder) => {
+        return folder;
       });
-    } else {
-      createBookmarkInFolder(targetFolder.id);
-    }
+    createBookmarkInFolder(targetFolder.id);
   });
 };
 
