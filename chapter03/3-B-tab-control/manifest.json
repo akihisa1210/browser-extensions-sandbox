@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Popup tab manipulation",
+  "description": "Tab management with a popup",
+  "version": "0.1",
+  "browser_action": {
+    "default_icon": "browser_action_icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs"
+  ]
+}
